@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: openproject
+      POSTGRES_PASSWORD: openproject_secret
+      POSTGRES_DB: openproject
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+
+  openproject:
+    image: openproject/community:13.4
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "8080:80"
+    environment:
+      OPENPROJECT_HTTPS: "false"
+      OPENPROJECT_HOST__NAME: "127.0.0.1:8080"
+      OPENPROJECT_SECRET_KEY_BASE: secret-key-base-change-me
+      OPENPROJECT_DB__URL: postgres://openproject:openproject_secret@postgres/openproject
+      OPENPROJECT_REDIS__URL: redis://redis:6379
+    volumes:
+      - op_data:/var/openproject/assets
+      - ./config:/etc/openproject
+
+volumes:
+  postgres_data:
+  op_data:
