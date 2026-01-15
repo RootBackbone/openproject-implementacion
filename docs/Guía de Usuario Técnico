@@ -1,0 +1,492 @@
+# 👤 Guía de Usuario Técnico - OpenProject
+
+## Contenido
+
+1. [Primer Acceso](#primer-acceso)
+2. [Creación de Proyectos](#creación-de-proyectos)
+3. [Gestión de Work Packages](#gestión-de-work-packages)
+4. [Flujo de Revisión de Código](#flujo-de-revisión-de-código)
+5. [Integración con GitHub](#integración-con-github)
+6. [Dashboard y Métricas](#dashboard-y-métricas)
+7. [Gestión de Equipo](#gestión-de-equipo)
+
+---
+
+## 1. Primer Acceso
+
+### 1.1 Iniciar Sesión
+
+1. Abre tu navegador
+2. Ve a: `http://localhost:8080`
+3. Ingresa credenciales:
+   - **Usuario:** `admin`
+   - **Password:** (la configurada en .env)
+
+### 1.2 Cambiar Contraseña
+
+Al primer login, OpenProject te pedirá cambiar la contraseña:
+
+1. Ingresa tu contraseña actual
+2. Ingresa nueva contraseña (mínimo 8 caracteres)
+3. Confirma nueva contraseña
+4. Haz clic en "Guardar"
+
+### 1.3 Configurar Perfil
+
+1. Haz clic en tu avatar (esquina superior derecha)
+2. Selecciona "Mi cuenta"
+3. Completa:
+   - Nombre completo
+   - Email
+   - Idioma preferido
+   - Zona horaria
+4. Guarda cambios
+
+---
+
+## 2. Creación de Proyectos
+
+### 2.1 Crear Nuevo Proyecto
+
+1. Haz clic en **"+ Proyecto"** (menú superior)
+2. Completa el formulario:
+   - **Nombre:** Nombre descriptivo del proyecto
+   - **Identificador:** slug único (ej: `proyecto-calidad`)
+   - **Descripción:** Breve descripción
+   - **Público:** Desmarcado (privado por defecto)
+3. Haz clic en "Crear"
+
+### 2.2 Configuración Inicial del Proyecto
+
+#### Activar Módulos
+
+1. En el proyecto, ve a **Configuración del proyecto**
+2. En la pestaña **Módulos**, activa:
+   - ✅ Work packages
+   - ✅ Calendario
+   - ✅ Gantt
+   - ✅ Wiki
+   - ✅ Foros (opcional)
+   - ✅ Repositorios (para GitHub)
+3. Guarda cambios
+
+#### Definir Tipos de Work Package
+
+1. Ve a **Configuración** → **Tipos**
+2. Tipos recomendados:
+   - **Task** (Tarea): Trabajo general
+   - **Bug** (Error): Problemas a corregir
+   - **Feature** (Funcionalidad): Nuevas características
+   - **Code Review** (Revisión): Para revisiones de código
+3. Personaliza según necesites
+
+---
+
+## 3. Gestión de Work Packages
+
+### 3.1 Crear Work Package
+
+#### Método 1: Desde el Proyecto
+
+1. Entra a tu proyecto
+2. Haz clic en **"+ Crear"** (botón verde)
+3. Completa:
+   - **Tipo:** Task, Bug, Feature, etc.
+   - **Asunto:** Título descriptivo
+   - **Descripción:** Detalles del trabajo
+   - **Asignar a:** Responsable
+   - **Estado:** New, In Progress, etc.
+   - **Prioridad:** Low, Normal, High, Immediate
+   - **Fecha inicio/fin:** Opcional
+4. Guarda
+
+#### Método 2: Vista Rápida
+
+1. Presiona `Alt + W` (atajo de teclado)
+2. Completa campos mínimos
+3. Guarda
+
+### 3.2 Editar Work Package
+
+1. Haz clic en el WP que desees editar
+2. En el panel lateral derecho:
+   - Cambia estado, asignado, prioridad, etc.
+   - Los cambios se guardan automáticamente
+3. Para editar descripción:
+   - Haz clic en el lápiz junto a la descripción
+   - Usa Markdown para formato
+
+### 3.3 Comentar en Work Packages
+
+1. Abre el Work Package
+2. Baja a la sección **"Actividad"**
+3. Escribe tu comentario
+4. Usa `@nombre` para mencionar a alguien
+5. Haz clic en **"Comentar"**
+
+### 3.4 Adjuntar Archivos
+
+1. Abre el Work Package
+2. Arrastra archivos al área de descripción
+3. O haz clic en 📎 para seleccionar archivos
+4. Los archivos se subirán automáticamente
+
+### 3.5 Relacionar Work Packages
+
+1. Abre un Work Package
+2. En el panel derecho, busca **"Relaciones"**
+3. Haz clic en **"+ Agregar relación"**
+4. Selecciona tipo:
+   - **Related to** (Relacionado con)
+   - **Blocks** (Bloquea)
+   - **Blocked by** (Bloqueado por)
+   - **Parent** (Padre)
+   - **Child** (Hijo)
+5. Busca el WP relacionado
+6. Guarda
+
+---
+
+## 4. Flujo de Revisión de Código
+
+### 4.1 Proceso de Revisión
+
+```
+1. Desarrollador → Crea PR en GitHub
+2. Sistema → Genera WP en OpenProject (automático)
+3. Líder → Asigna revisor
+4. Revisor → Revisa código usando plantilla
+5. Revisor → Aprueba o solicita cambios
+6. Desarrollador → Realiza cambios (si es necesario)
+7. Revisor → Aprueba finalmente
+8. Sistema → Cierra WP (automático)
+```
+
+### 4.2 Crear Work Package de Revisión
+
+1. Crea nuevo WP tipo **"Code Review"**
+2. Completa plantilla:
+
+```markdown
+## 📋 Información del Pull Request
+
+- **Repositorio:** [nombre-repo]
+- **PR #:** [número]
+- **Autor:** [nombre]
+- **Branch:** [feature/nombre]
+
+## 🎯 Objetivo del Cambio
+
+[Descripción breve de qué se cambió y por qué]
+
+## ✅ Checklist de Revisión
+
+### Código
+- [ ] El código es legible y está bien comentado
+- [ ] Sigue las convenciones de estilo del proyecto
+- [ ] No hay código duplicado
+- [ ] Variables tienen nombres descriptivos
+
+### Funcionalidad
+- [ ] El código hace lo que debe hacer
+- [ ] Se manejan casos edge correctamente
+- [ ] No introduce bugs nuevos
+
+### Tests
+- [ ] Hay tests para el nuevo código
+- [ ] Los tests existentes pasan
+- [ ] Cobertura de tests es adecuada
+
+### Seguridad
+- [ ] No hay vulnerabilidades evidentes
+- [ ] Inputs son validados
+- [ ] No hay secretos en el código
+
+### Documentación
+- [ ] Código está documentado
+- [ ] README actualizado si es necesario
+- [ ] Comentarios explican el "por qué"
+
+## 💬 Comentarios del Revisor
+
+[Comentarios detallados aquí]
+
+## ✅ Decisión
+
+- [ ] **APROBADO** - Listo para merge
+- [ ] **CAMBIOS REQUERIDOS** - Necesita modificaciones
+- [ ] **RECHAZADO** - No cumple estándares
+```
+
+3. Asigna a revisor
+4. Cambia estado a "In Review"
+
+### 4.3 Realizar Revisión
+
+Como revisor:
+
+1. Abre el WP asignado
+2. Ve al PR en GitHub (hay un link)
+3. Revisa el código
+4. Marca items del checklist
+5. Agrega comentarios específicos
+6. Cambia estado:
+   - **"Approved"** si todo está bien
+   - **"In Progress"** si requiere cambios
+7. Notifica al desarrollador
+
+---
+
+## 5. Integración con GitHub
+
+### 5.1 Configurar Personal Access Token
+
+1. Ve a GitHub → Settings → Developer settings
+2. Personal access tokens → Generate new token
+3. Permisos necesarios:
+   - ✅ repo (todos)
+   - ✅ admin:repo_hook
+   - ✅ read:org
+4. Copia el token generado
+
+### 5.2 Conectar Repositorio
+
+1. En OpenProject, ve a **Administración**
+2. **Repositorios** → **Nuevo repositorio**
+3. Completa:
+   - **URL:** `https://github.com/usuario/repo.git`
+   - **Login:** Tu usuario de GitHub
+   - **Password:** El token generado
+4. Guarda
+
+### 5.3 Configurar Webhooks
+
+Ejecuta el script de sincronización:
+
+```bash
+export GITHUB_TOKEN='tu_token'
+export GITHUB_REPO='usuario/repo'
+export OPENPROJECT_API_KEY='tu_api_key'
+
+python3 scripts/github-sync.py
+```
+
+Sigue las instrucciones en pantalla.
+
+### 5.4 Referenciar Issues desde Commits
+
+En tus commits, usa el formato:
+
+```bash
+git commit -m "Fix bug en login. Refs #123"
+# Donde #123 es el ID del Work Package
+```
+
+OpenProject detectará la referencia y la vinculará.
+
+---
+
+## 6. Dashboard y Métricas
+
+### 6.1 Acceder al Dashboard
+
+1. Ve a la página principal del proyecto
+2. El dashboard aparece automáticamente
+3. O haz clic en **"Resumen"** en el menú
+
+### 6.2 Widgets Disponibles
+
+#### Widget: Work Packages Asignados
+
+Muestra WPs asignados a ti:
+
+1. Haz clic en **"+ Agregar widget"**
+2. Selecciona **"Work packages asignados a mí"**
+3. Configura filtros si deseas
+
+#### Widget: Calendar
+
+Visualiza WPs en calendario:
+
+1. Agregar widget → **"Calendario"**
+2. Selecciona vista (mes, semana, día)
+
+#### Widget: Diagrama de Gantt
+
+Ver cronograma del proyecto:
+
+1. Agregar widget → **"Diagrama de Gantt"**
+2. Muestra dependencias y timeline
+
+#### Widget: Progreso del Proyecto
+
+Muestra estadísticas:
+
+1. Agregar widget → **"Resumen de proyecto"**
+2. Ver % completado, WPs abiertos/cerrados
+
+### 6.3 Métricas de Calidad
+
+Para ver métricas específicas de calidad:
+
+1. Ve a **Reportes** en el menú
+2. Selecciona tipo de reporte:
+   - **Por tipo:** Cuántos bugs, features, etc.
+   - **Por estado:** Abiertos vs cerrados
+   - **Por asignado:** Carga de trabajo
+   - **Tiempo:** Tiempo promedio de resolución
+
+3. Personaliza filtros:
+   - Rango de fechas
+   - Tipo de WP
+   - Asignados
+   - Prioridad
+
+4. Exporta si necesitas:
+   - PDF
+   - CSV
+   - Excel
+
+### 6.4 Crear Reporte Personalizado
+
+1. Ve a **Costeo** (Cost reporting)
+2. **Reportes personalizados**
+3. Configura:
+   - Métricas a medir
+   - Filtros
+   - Agrupación
+   - Visualización
+4. Guarda el reporte para reutilizar
+
+---
+
+## 7. Gestión de Equipo
+
+### 7.1 Invitar Miembros
+
+1. En el proyecto, ve a **Configuración**
+2. Pestaña **Miembros**
+3. Haz clic en **"+ Miembro"**
+4. Busca usuario (o invita por email)
+5. Asigna rol:
+   - **Desarrollador**
+   - **Revisor**
+   - **Líder Técnico**
+   - **Project Manager**
+6. Guarda
+
+### 7.2 Definir Roles y Permisos
+
+#### Rol: Desarrollador
+
+Permisos:
+- ✅ Ver work packages
+- ✅ Crear work packages
+- ✅ Editar work packages propios
+- ✅ Comentar
+- ✅ Adjuntar archivos
+- ❌ Eliminar work packages
+- ❌ Administrar proyecto
+
+#### Rol: Revisor
+
+Permisos de Desarrollador +
+- ✅ Editar todos los work packages
+- ✅ Asignar work packages
+- ✅ Cambiar estados
+- ✅ Aprobar/rechazar
+
+#### Rol: Líder Técnico
+
+Permisos de Revisor +
+- ✅ Administrar miembros
+- ✅ Configurar workflow
+- ✅ Ver reportes avanzados
+- ✅ Administrar repositorios
+
+### 7.3 Configurar Roles Personalizados
+
+1. Ve a **Administración** → **Roles y permisos**
+2. Haz clic en **"+ Nuevo rol"**
+3. Nombra el rol (ej: "QA Tester")
+4. Marca permisos específicos:
+   - Work packages: ver, crear, editar, eliminar
+   - Tiempo: registrar tiempo
+   - Wiki: ver, editar
+   - Repositorio: ver commits
+   - Y más...
+5. Guarda
+
+### 7.4 Notificaciones del Equipo
+
+Configurar qué notificaciones recibe cada quien:
+
+1. Usuario → **Mi cuenta**
+2. Pestaña **Notificaciones**
+3. Configurar por proyecto:
+   - ✅ Cuando se me asigna un WP
+   - ✅ Cuando me mencionan
+   - ✅ Cuando comenten en mis WPs
+   - ❌ Todo lo demás (reduce ruido)
+4. Guarda
+
+---
+
+## 🎯 Mejores Prácticas
+
+### Para Desarrolladores
+
+1. **Crea WPs claros:** Título descriptivo, detalles suficientes
+2. **Actualiza el estado:** Cambia de "New" a "In Progress" cuando empieces
+3. **Comenta avances:** Mantén al equipo informado
+4. **Referencia commits:** Usa `Refs #123` en commits
+5. **Cierra cuando esté listo:** Cambia a "Resolved" o "Closed"
+
+### Para Revisores
+
+1. **Revisa pronto:** No dejes PRs esperando días
+2. **Sé específico:** Señala exactamente qué cambiar
+3. **Sé constructivo:** Crítica constructiva, no destructiva
+4. **Usa la plantilla:** Completa el checklist completo
+5. **Comunica decisión:** Aprueba o solicita cambios claramente
+
+### Para Líderes Técnicos
+
+1. **Distribuye carga:** Asigna WPs equitativamente
+2. **Monitorea blockers:** Identifica y resuelve bloqueos
+3. **Revisa métricas:** Usa dashboard semanalmente
+4. **Da feedback:** Retrospectivas con el equipo
+5. **Actualiza workflow:** Mejora procesos continuamente
+
+---
+
+## 🆘 Soporte y Ayuda
+
+### Recursos
+
+- **Documentación oficial:** https://www.openproject.org/docs/
+- **Foros de comunidad:** https://community.openproject.org/
+- **Wiki del proyecto:** (tu repositorio)/wiki
+
+### Contacto
+
+Si tienes dudas:
+1. Revisa esta guía primero
+2. Busca en la wiki del proyecto
+3. Pregunta en el foro del equipo
+4. Contacta al administrador del sistema
+
+---
+
+## ✅ Checklist de Uso Efectivo
+
+- [ ] Perfil completado con información real
+- [ ] Notificaciones configuradas (no demasiadas)
+- [ ] Entiendes cómo crear Work Packages
+- [ ] Sabes cómo usar la plantilla de revisión
+- [ ] Conoces los shortcuts de teclado básicos
+- [ ] Has practicado con el dashboard
+- [ ] Sabes cómo mencionar a colegas (@nombre)
+- [ ] Entiendes el flujo de trabajo del equipo
+
+Si marcaste todos, ¡estás listo para usar OpenProject efectivamente! 🎉
