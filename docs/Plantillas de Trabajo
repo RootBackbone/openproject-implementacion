@@ -1,0 +1,573 @@
+# 📝 Plantillas de Trabajo
+
+## 1. Plantilla: Code Review
+
+```markdown
+# 🔍 Code Review - [Título del PR]
+
+## 📋 Información del Pull Request
+
+- **Repositorio:** [nombre-del-repositorio]
+- **PR #:** [número del PR]
+- **Autor:** [nombre del desarrollador]
+- **Branch:** [nombre del branch]
+- **Fecha:** [fecha de creación]
+- **Link al PR:** [URL completo del PR en GitHub]
+
+---
+
+## 🎯 Objetivo del Cambio
+
+[Descripción breve de qué se cambió y por qué. 2-3 párrafos máximo]
+
+**Funcionalidad afectada:**
+- [Módulo/componente 1]
+- [Módulo/componente 2]
+
+**Tipo de cambio:**
+- [ ] Bug fix
+- [ ] Nueva feature
+- [ ] Refactorización
+- [ ] Actualización de dependencias
+- [ ] Documentación
+- [ ] Otro: ___________
+
+---
+
+## ✅ Checklist de Revisión
+
+### 💻 Código
+
+- [ ] **Legibilidad:** El código es fácil de entender
+- [ ] **Comentarios:** Hay comentarios explicando el "por qué", no el "qué"
+- [ ] **Convenciones:** Sigue el style guide del proyecto
+- [ ] **DRY:** No hay código duplicado innecesariamente
+- [ ] **Nombres:** Variables y funciones tienen nombres descriptivos
+- [ ] **Complejidad:** Funciones no son demasiado largas/complejas
+- [ ] **Imports:** Solo se importa lo necesario
+
+**Comentarios sobre código:**
+[Añadir comentarios específicos aquí]
+
+---
+
+### ⚙️ Funcionalidad
+
+- [ ] **Funciona:** El código hace lo que debe hacer
+- [ ] **Edge cases:** Se manejan casos extremos correctamente
+- [ ] **Performance:** No introduce problemas de rendimiento evidentes
+- [ ] **Backward compatibility:** No rompe funcionalidad existente
+- [ ] **Error handling:** Errores se manejan apropiadamente
+- [ ] **Validaciones:** Inputs son validados correctamente
+
+**Comentarios sobre funcionalidad:**
+[Añadir comentarios específicos aquí]
+
+---
+
+### 🧪 Tests
+
+- [ ] **Existen tests:** Hay tests para el código nuevo
+- [ ] **Coverage:** Cobertura de tests es adecuada (>80%)
+- [ ] **Tests pasan:** Todos los tests existentes siguen pasando
+- [ ] **Tests unitarios:** Funciones individuales están testeadas
+- [ ] **Tests de integración:** Interacciones están testeadas
+- [ ] **Tests significativos:** Tests realmente validan la lógica
+
+**Comandos ejecutados:**
+```bash
+# Tests que ejecuté
+npm test
+# o
+pytest
+# o
+[tu comando de tests]
+```
+
+**Resultados:**
+- Tests pasados: ___/___
+- Cobertura: ___%
+
+**Comentarios sobre tests:**
+[Añadir comentarios específicos aquí]
+
+---
+
+### 🔒 Seguridad
+
+- [ ] **No hay vulnerabilidades:** No detecté problemas de seguridad
+- [ ] **Validación de inputs:** Datos de usuario son validados/sanitizados
+- [ ] **No hay secretos:** No hay API keys, passwords, tokens en el código
+- [ ] **Dependencias:** No se agregan dependencias con vulnerabilidades conocidas
+- [ ] **Autenticación:** Si aplica, está implementada correctamente
+- [ ] **Autorización:** Si aplica, permisos son verificados
+
+**Comentarios sobre seguridad:**
+[Añadir comentarios específicos aquí]
+
+---
+
+### 📚 Documentación
+
+- [ ] **Código documentado:** Funciones complejas tienen docstrings
+- [ ] **README actualizado:** Si es necesario, README refleja cambios
+- [ ] **CHANGELOG:** Cambios están documentados en CHANGELOG
+- [ ] **API docs:** Si es API, documentación está actualizada
+- [ ] **Comentarios útiles:** Comentarios explican decisiones no obvias
+
+**Comentarios sobre documentación:**
+[Añadir comentarios específicos aquí]
+
+---
+
+### 🎨 UI/UX (si aplica)
+
+- [ ] **Responsive:** Funciona en móvil/tablet/desktop
+- [ ] **Accesibilidad:** Cumple estándares básicos (contrast, labels)
+- [ ] **Usabilidad:** Interfaz es intuitiva
+- [ ] **Consistencia:** Sigue el diseño existente
+- [ ] **Loading states:** Hay indicadores de carga
+- [ ] **Error messages:** Mensajes de error son claros
+
+**Comentarios sobre UI/UX:**
+[Añadir comentarios específicos aquí]
+
+---
+
+## 🐛 Bugs Encontrados
+
+| # | Severidad | Descripción | Ubicación |
+|---|-----------|-------------|-----------|
+| 1 | Alta/Media/Baja | [Descripción del bug] | [Archivo:línea] |
+| 2 | Alta/Media/Baja | [Descripción del bug] | [Archivo:línea] |
+
+---
+
+## 💡 Sugerencias de Mejora
+
+| # | Tipo | Sugerencia | Prioridad |
+|---|------|------------|-----------|
+| 1 | Refactor/Performance/Estilo | [Descripción] | Must/Should/Nice to have |
+| 2 | Refactor/Performance/Estilo | [Descripción] | Must/Should/Nice to have |
+
+---
+
+## 💬 Comentarios Generales del Revisor
+
+[Espacio para comentarios adicionales, impresión general, felicitaciones, etc.]
+
+---
+
+## ✅ Decisión Final
+
+**Selecciona UNA opción:**
+
+- [ ] **✅ APROBADO** - El código está listo para merge
+  - Comentario: [Razón de aprobación]
+
+- [ ] **🔄 CAMBIOS REQUERIDOS** - Necesita modificaciones antes de merge
+  - Comentario: [Qué debe cambiar]
+  - Prioridad cambios: Alta / Media / Baja
+
+- [ ] **❌ RECHAZADO** - No cumple con los estándares del proyecto
+  - Comentario: [Razón de rechazo]
+
+---
+
+## 📊 Métricas
+
+- **Tiempo de revisión:** [X horas]
+- **Archivos revisados:** [X archivos]
+- **Líneas de código:** [+X, -Y]
+- **Complejidad:** Baja / Media / Alta
+
+---
+
+## 👤 Información del Revisor
+
+- **Revisor:** [Tu nombre]
+- **Fecha de revisión:** [Fecha]
+- **Próxima acción:** [Asignar de vuelta a desarrollador / Aprobar merge / etc.]
+
+---
+
+## 🔗 Referencias
+
+- Issue relacionado: #[número]
+- Documentación: [link]
+- Discusión: [link a discusión si aplica]
+```
+
+---
+
+## 2. Plantilla: Issue/Bug Report
+
+```markdown
+# 🐛 [Bug] Título Descriptivo del Bug
+
+## 📋 Información General
+
+- **Tipo:** Bug / Feature / Task
+- **Prioridad:** 🔴 Alta / 🟡 Media / 🟢 Baja
+- **Severidad:** Crítico / Mayor / Menor / Trivial
+- **Módulo afectado:** [nombre del módulo]
+- **Versión:** [versión donde se encontró]
+
+---
+
+## 📝 Descripción
+
+[Descripción clara y concisa del problema o feature]
+
+---
+
+## 🔄 Pasos para Reproducir (para bugs)
+
+1. [Primer paso]
+2. [Segundo paso]
+3. [Tercer paso]
+...
+
+---
+
+## ✅ Comportamiento Esperado
+
+[Qué debería pasar]
+
+---
+
+## ❌ Comportamiento Actual
+
+[Qué pasa actualmente]
+
+---
+
+## 📸 Screenshots/Videos (si aplica)
+
+[Adjuntar capturas de pantalla o videos]
+
+---
+
+## 🖥️ Ambiente
+
+- **OS:** [Windows 10 / macOS 12 / Ubuntu 20.04]
+- **Navegador:** [Chrome 98 / Firefox 95 / Safari 15]
+- **Versión del navegador:** [versión]
+- **Dispositivo:** [Desktop / Mobile / Tablet]
+
+---
+
+## 📋 Logs/Errores
+
+```
+[Pegar logs relevantes aquí]
+```
+
+---
+
+## 💡 Solución Propuesta (opcional)
+
+[Si tienes idea de cómo solucionarlo]
+
+---
+
+## 🔗 Referencias
+
+- Relacionado con: #[número]
+- Documentación: [link]
+```
+
+---
+
+## 3. Plantilla: Feature Request
+
+```markdown
+# ✨ [Feature] Título de la Funcionalidad
+
+## 📋 Información General
+
+- **Tipo:** Nueva Feature
+- **Prioridad:** 🔴 Alta / 🟡 Media / 🟢 Baja
+- **Módulo:** [módulo donde se implementará]
+- **Estimación:** [horas/días estimados]
+
+---
+
+## 🎯 Objetivo
+
+[¿Qué problema resuelve esta feature? ¿Por qué es necesaria?]
+
+---
+
+## 👤 Usuario Objetivo
+
+[¿Quién usará esta feature? Desarrollador / Usuario final / Admin]
+
+---
+
+## 📝 Descripción Detallada
+
+[Descripción completa de qué debe hacer la feature]
+
+---
+
+## ✅ Criterios de Aceptación
+
+- [ ] [Criterio 1]
+- [ ] [Criterio 2]
+- [ ] [Criterio 3]
+- [ ] [Criterio 4]
+
+---
+
+## 🎨 Mockups/Wireframes (si aplica)
+
+[Adjuntar diseños, mockups, o diagramas]
+
+---
+
+## 🔧 Consideraciones Técnicas
+
+### Backend
+- [Consideración 1]
+- [Consideración 2]
+
+### Frontend
+- [Consideración 1]
+- [Consideración 2]
+
+### Base de Datos
+- [Cambios necesarios en BD]
+
+---
+
+## 📊 Impacto
+
+- **Performance:** Ninguno / Bajo / Medio / Alto
+- **Otros módulos afectados:** [lista de módulos]
+- **Breaking changes:** Sí / No
+- **Requiere migración:** Sí / No
+
+---
+
+## 🧪 Plan de Testing
+
+- [ ] Unit tests
+- [ ] Integration tests
+- [ ] E2E tests
+- [ ] Manual testing
+
+---
+
+## 🔗 Referencias
+
+- Relacionado con: #[número]
+- Documentación: [link]
+- Ejemplos similares: [links]
+```
+
+---
+
+## 4. Plantilla: Sprint Planning
+
+```markdown
+# 🎯 Sprint Planning - Sprint [N]
+
+## 📅 Información del Sprint
+
+- **Sprint #:** [número]
+- **Duración:** [2 semanas]
+- **Inicio:** [fecha]
+- **Fin:** [fecha]
+- **Sprint Goal:** [objetivo principal del sprint]
+
+---
+
+## 👥 Equipo
+
+- **Product Owner:** [nombre]
+- **Scrum Master:** [nombre]
+- **Desarrolladores:**
+  - [nombre 1]
+  - [nombre 2]
+  - [nombre 3]
+
+---
+
+## 🎯 Objetivos del Sprint
+
+### Objetivo Principal
+[Descripción del objetivo principal]
+
+### Objetivos Secundarios
+1. [Objetivo 2]
+2. [Objetivo 3]
+
+---
+
+## 📊 Capacidad del Equipo
+
+- **Story Points disponibles:** [total]
+- **Días laborales:** [número]
+- **Vacaciones/ausencias:** [detalles]
+
+---
+
+## 📋 Work Packages Seleccionados
+
+### Alta Prioridad (Must Have)
+
+| ID | Título | Tipo | SP | Asignado |
+|----|--------|------|----|----- ----|
+| #123 | [Título] | Feature | 5 | [Nombre] |
+| #124 | [Título] | Bug | 3 | [Nombre] |
+
+**Total SP:** [X]
+
+### Media Prioridad (Should Have)
+
+| ID | Título | Tipo | SP | Asignado |
+|----|--------|------|----|----- ----|
+| #125 | [Título] | Task | 2 | [Nombre] |
+
+**Total SP:** [X]
+
+### Baja Prioridad (Nice to Have)
+
+| ID | Título | Tipo | SP | Asignado |
+|----|--------|------|----|----- ----|
+| #126 | [Título] | Feature | 8 | [Nombre] |
+
+**Total SP:** [X]
+
+---
+
+## 🎲 Riesgos Identificados
+
+| Riesgo | Probabilidad | Impacto | Mitigación |
+|--------|--------------|---------|------------|
+| [Riesgo 1] | Alta/Media/Baja | Alto/Medio/Bajo | [Plan] |
+| [Riesgo 2] | Alta/Media/Baja | Alto/Medio/Bajo | [Plan] |
+
+---
+
+## 📈 Métricas Objetivo
+
+- **Velocity esperado:** [X story points]
+- **% de completion:** [80%+]
+- **Bugs esperados:** [≤ Y]
+- **Code review time:** [≤ Z horas]
+
+---
+
+## 🗓️ Ceremonias
+
+- **Daily Standup:** [hora] todos los días
+- **Sprint Review:** [fecha y hora]
+- **Sprint Retrospective:** [fecha y hora]
+
+---
+
+## 📝 Notas Adicionales
+
+[Cualquier información adicional relevante para el sprint]
+```
+
+---
+
+## 5. Plantilla: Sprint Retrospective
+
+```markdown
+# 🔄 Sprint Retrospective - Sprint [N]
+
+## 📅 Información
+
+- **Sprint:** [número]
+- **Fecha:** [fecha de la retro]
+- **Participantes:** [lista de participantes]
+- **Facilitador:** [nombre]
+
+---
+
+## 📊 Métricas del Sprint
+
+| Métrica | Objetivo | Real | Status |
+|---------|----------|------|--------|
+| Story Points | [X] | [Y] | ✅/⚠️/❌ |
+| WPs Completados | [X] | [Y] | ✅/⚠️/❌ |
+| Bugs Nuevos | ≤[X] | [Y] | ✅/⚠️/❌ |
+| Code Review Time | ≤[X]h | [Y]h | ✅/⚠️/❌ |
+
+---
+
+## ✅ ¿Qué Funcionó Bien?
+
+1. [Aspecto positivo 1]
+   - Detalle/ejemplo
+
+2. [Aspecto positivo 2]
+   - Detalle/ejemplo
+
+3. [Aspecto positivo 3]
+   - Detalle/ejemplo
+
+---
+
+## ❌ ¿Qué No Funcionó Bien?
+
+1. [Problema 1]
+   - Impacto: [descripción]
+   - Causa raíz: [análisis]
+
+2. [Problema 2]
+   - Impacto: [descripción]
+   - Causa raíz: [análisis]
+
+3. [Problema 3]
+   - Impacto: [descripción]
+   - Causa raíz: [análisis]
+
+---
+
+## 💡 Ideas de Mejora
+
+| Idea | Responsable | Deadline | Prioridad |
+|------|-------------|----------|-----------|
+| [Mejora 1] | [Nombre] | [Fecha] | Alta/Media/Baja |
+| [Mejora 2] | [Nombre] | [Fecha] | Alta/Media/Baja |
+| [Mejora 3] | [Nombre] | [Fecha] | Alta/Media/Baja |
+
+---
+
+## 🎬 Action Items
+
+- [ ] [Acción 1] - Responsable: [Nombre] - Deadline: [Fecha]
+- [ ] [Acción 2] - Responsable: [Nombre] - Deadline: [Fecha]
+- [ ] [Acción 3] - Responsable: [Nombre] - Deadline: [Fecha]
+
+---
+
+## 📝 Notas Adicionales
+
+[Cualquier otra observación o comentario del equipo]
+
+---
+
+## 🏆 Reconocimientos
+
+- **MVP del Sprint:** [Nombre] - Por [razón]
+- **Mejor ayuda:** [Nombre] - Por [razón]
+- **Mejor solución creativa:** [Nombre] - Por [razón]
+```
+
+---
+
+## 📌 Cómo Usar las Plantillas
+
+1. **Copia la plantilla** que necesites
+2. **Crea un nuevo Work Package** en OpenProject
+3. **Pega la plantilla** en la descripción
+4. **Completa** los campos marcados con [corchetes]
+5. **Guarda** y asigna según sea necesario
+
+Las plantillas están en formato Markdown, que OpenProject renderiza automáticamente.
