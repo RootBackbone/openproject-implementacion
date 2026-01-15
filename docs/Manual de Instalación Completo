@@ -1,0 +1,504 @@
+# 📘 Manual de Instalación OpenProject
+
+## Tabla de Contenidos
+
+1. [Requisitos Previos](#requisitos-previos)
+2. [Instalación de Docker](#instalación-de-docker)
+3. [Descarga del Proyecto](#descarga-del-proyecto)
+4. [Configuración](#configuración)
+5. [Instalación Automatizada](#instalación-automatizada)
+6. [Instalación Manual](#instalación-manual)
+7. [Verificación](#verificación)
+8. [Solución de Problemas](#solución-de-problemas)
+
+---
+
+## 1. Requisitos Previos
+
+### Hardware Mínimo
+
+| Componente | Requisito Mínimo | Recomendado |
+|------------|------------------|-------------|
+| CPU | 2 cores | 4 cores |
+| RAM | 4 GB | 8 GB |
+| Disco | 20 GB libres | 50 GB libres |
+| Red | Conexión estable | 10 Mbps+ |
+
+### Software Requerido
+
+- **Sistema Operativo:**
+  - Linux (Ubuntu 20.04+, Debian 11+, CentOS 8+)
+  - macOS 11+ (Big Sur o superior)
+  - Windows 10/11 con WSL2
+
+- **Docker:** Versión 20.10 o superior
+- **Docker Compose:** Versión 2.0 o superior
+- **Git:** Versión 2.30 o superior
+
+---
+
+## 2. Instalación de Docker
+
+### 🐧 Linux (Ubuntu/Debian)
+
+```bash
+# Actualizar sistema
+sudo apt update
+sudo apt upgrade -y
+
+# Instalar dependencias
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+
+# Agregar repositorio de Docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Instalar Docker
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# Verificar instalación
+docker --version
+docker compose version
+
+# Agregar usuario al grupo docker (opcional, evita usar sudo)
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+### 🍎 macOS
+
+1. Descarga Docker Desktop desde: https://www.docker.com/products/docker-desktop/
+2. Abre el archivo .dmg descargado
+3. Arrastra Docker a la carpeta Aplicaciones
+4. Abre Docker Desktop y sigue las instrucciones
+5. Verifica en Terminal:
+
+```bash
+docker --version
+docker compose version
+```
+
+### 🪟 Windows
+
+1. Habilita WSL2:
+   - Abre PowerShell como Administrador
+   - Ejecuta: `wsl --install`
+   - Reinicia tu computadora
+
+2. Descarga Docker Desktop desde: https://www.docker.com/products/docker-desktop/
+3. Ejecuta el instalador
+4. Reinicia cuando se solicite
+5. Abre Docker Desktop
+6. Verifica en PowerShell o CMD:
+
+```cmd
+docker --version
+docker compose version
+```
+
+---
+
+## 3. Descarga del Proyecto
+
+### Opción A: Clonar desde GitHub
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/tu-usuario/openproject-implementation.git
+
+# Entrar al directorio
+cd openproject-implementation
+```
+
+### Opción B: Descargar ZIP
+
+1. Ve a: https://github.com/tu-usuario/openproject-implementation
+2. Haz clic en "Code" → "Download ZIP"
+3. Extrae el archivo ZIP
+4. Abre una terminal en esa carpeta
+
+---
+
+## 4. Configuración
+
+### 4.1 Crear Archivo de Configuración
+
+```bash
+# Copiar plantilla
+cp config/.env.example config/.env
+
+# Editar con tu editor favorito
+nano config/.env
+# o
+vim config/.env
+# o
+code config/.env  # VS Code
+```
+
+### 4.2 Variables Importantes a Configurar
+
+```bash
+# ===== CONFIGURACIÓN BÁSICA =====
+
+# Host (cambiar si usas un dominio)
+OPENPROJECT_HOST=localhost:8080
+
+# Contraseña de base de datos (CAMBIAR!)
+DB_PASSWORD=tu_contraseña_segura_aqui
+
+# Usuario administrador
+ADMIN_PASSWORD=contraseña_admin_segura
+ADMIN_EMAIL=tu-email@ejemplo.com
+
+# ===== EMAIL (OPCIONAL) =====
+
+# Si quieres que OpenProject envíe emails
+EMAIL_METHOD=smtp
+SMTP_ADDRESS=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=tu-email@gmail.com
+SMTP_PASS=tu-app-password
+
+# ===== GITHUB (CONFIGURAR DESPUÉS) =====
+
+# Se configuran en la Semana 3
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+```
+
+### 4.3 Configuración de Email con Gmail (Opcional)
+
+Si quieres usar Gmail para enviar notificaciones:
+
+1. Ve a tu cuenta de Google
+2. Seguridad → Verificación en dos pasos → Contraseñas de aplicaciones
+3. Genera una contraseña para "Correo"
+4. Usa esa contraseña en `SMTP_PASS`
+
+---
+
+## 5. Instalación Automatizada
+
+### 5.1 Dar Permisos de Ejecución
+
+```bash
+# Hacer scripts ejecutables
+chmod +x scripts/*.sh
+```
+
+### 5.2 Ejecutar Script de Instalación
+
+```bash
+# Ejecutar instalador
+./scripts/install.sh
+```
+
+El script hará:
+1. ✅ Verificar requisitos del sistema
+2. ✅ Crear estructura de directorios
+3. ✅ Validar configuración
+4. ✅ Descargar imágenes Docker
+5. ✅ Iniciar servicios
+6. ✅ Esperar a que OpenProject esté listo
+7. ✅ Verificar instalación
+
+**Tiempo estimado:** 10-15 minutos (primera vez)
+
+### 5.3 Resultado Esperado
+
+```
+╔════════════════════════════════════════════════════════╗
+║            ✓ INSTALACIÓN COMPLETADA                    ║
+╚════════════════════════════════════════════════════════╝
+
+📍 Acceso:
+   URL:      http://localhost:8080
+   Usuario:  admin
+   Password: (revisa config/.env)
+
+🔧 Comandos útiles:
+   Ver logs:     cd config && docker-compose logs -f
+   Detener:      cd config && docker-compose stop
+   Reiniciar:    cd config && docker-compose restart
+```
+
+---
+
+## 6. Instalación Manual
+
+Si prefieres instalar paso a paso:
+
+### 6.1 Descargar Imágenes
+
+```bash
+cd config
+docker-compose pull
+```
+
+### 6.2 Iniciar Servicios
+
+```bash
+docker-compose up -d
+```
+
+### 6.3 Ver Logs (Opcional)
+
+```bash
+docker-compose logs -f
+```
+
+Presiona `Ctrl+C` para salir de los logs.
+
+### 6.4 Esperar Inicialización
+
+Primera vez tarda **5-10 minutos**. Puedes verificar con:
+
+```bash
+docker-compose ps
+```
+
+Todos los servicios deben mostrar "Up".
+
+---
+
+## 7. Verificación
+
+### 7.1 Script de Verificación
+
+```bash
+./scripts/verify.sh
+```
+
+### 7.2 Verificación Manual
+
+#### Verificar Contenedores
+
+```bash
+docker ps
+```
+
+Debes ver 3 contenedores corriendo:
+- `openproject-app`
+- `openproject-db`
+- `openproject-cache`
+
+#### Verificar Acceso Web
+
+1. Abre navegador
+2. Ve a: http://localhost:8080
+3. Debes ver la página de login de OpenProject
+
+#### Primer Login
+
+1. Usuario: `admin`
+2. Password: (la que pusiste en config/.env)
+3. OpenProject te pedirá cambiar la contraseña
+4. Sigue las instrucciones en pantalla
+
+---
+
+## 8. Solución de Problemas
+
+### Problema: "Puerto 8080 ya está en uso"
+
+**Solución 1:** Cambiar el puerto
+
+```bash
+# Editar config/docker-compose.yml
+# Cambiar línea:
+ports:
+  - "8080:80"
+
+# Por ejemplo a:
+ports:
+  - "8090:80"
+
+# Luego reiniciar
+docker-compose down
+docker-compose up -d
+```
+
+**Solución 2:** Detener el servicio que usa el puerto
+
+```bash
+# En Linux/Mac
+sudo lsof -i :8080
+# Anotar el PID y ejecutar:
+sudo kill -9 <PID>
+
+# En Windows
+netstat -ano | findstr :8080
+# Anotar el PID y ejecutar:
+taskkill /PID <PID> /F
+```
+
+### Problema: "Docker no está corriendo"
+
+**macOS/Windows:**
+- Abre Docker Desktop manualmente
+- Espera a que el ícono en la barra de tareas esté verde
+
+**Linux:**
+```bash
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+### Problema: "No puedo acceder a http://localhost:8080"
+
+1. Verifica que los contenedores estén corriendo:
+```bash
+docker ps
+```
+
+2. Verifica logs por errores:
+```bash
+cd config
+docker-compose logs openproject
+```
+
+3. Reinicia los servicios:
+```bash
+docker-compose restart
+```
+
+4. Si sigue sin funcionar, reconstruye:
+```bash
+docker-compose down
+docker-compose up -d --force-recreate
+```
+
+### Problema: "OpenProject tarda mucho en cargar"
+
+Es normal la primera vez. La inicialización puede tardar hasta 10 minutos.
+
+Monitorea el progreso:
+```bash
+cd config
+docker-compose logs -f openproject
+```
+
+Busca líneas que digan "Listening on..." - eso indica que está listo.
+
+### Problema: "Error de permisos en Linux"
+
+```bash
+# Agregar tu usuario al grupo docker
+sudo usermod -aG docker $USER
+
+# Cerrar sesión y volver a entrar, o ejecutar:
+newgrp docker
+
+# Ahora puedes usar docker sin sudo
+docker ps
+```
+
+### Problema: "No tengo suficiente espacio en disco"
+
+```bash
+# Limpiar imágenes y contenedores no usados
+docker system prune -a
+
+# Ver espacio usado
+docker system df
+```
+
+### Problema: "La base de datos no inicia"
+
+```bash
+# Ver logs específicos de PostgreSQL
+docker logs openproject-db
+
+# Si hay errores de permisos, recrear volumen:
+docker-compose down -v
+docker-compose up -d
+```
+
+### Problema: "Olvidé la contraseña de admin"
+
+```bash
+# Detener OpenProject
+cd config
+docker-compose down
+
+# Editar .env y cambiar ADMIN_PASSWORD
+
+# Eliminar volúmenes (¡perderás datos!)
+docker-compose down -v
+
+# Volver a crear todo
+docker-compose up -d
+```
+
+**Nota:** Esto reinicia OpenProject desde cero.
+
+### Problema: "Error al descargar imágenes Docker"
+
+Si tu internet es lento o inestable:
+
+```bash
+# Descargar imágenes una por una
+docker pull postgres:13
+docker pull redis:7-alpine
+docker pull openproject/openproject:14
+
+# Luego iniciar
+cd config
+docker-compose up -d
+```
+
+---
+
+## 📞 Obtener Más Ayuda
+
+Si ninguna solución funciona:
+
+1. **Revisa los logs completos:**
+```bash
+cd config
+docker-compose logs > logs.txt
+```
+
+2. **Verifica el estado del sistema:**
+```bash
+./scripts/verify.sh > verify-output.txt
+```
+
+3. **Crea un Issue en GitHub** con:
+   - Descripción del problema
+   - Sistema operativo y versión
+   - Versión de Docker (`docker --version`)
+   - Contenido de logs.txt y verify-output.txt
+   - Pasos que seguiste
+
+---
+
+## ✅ Checklist de Instalación Exitosa
+
+- [ ] Docker instalado y corriendo
+- [ ] Proyecto descargado
+- [ ] Archivo config/.env configurado
+- [ ] Scripts tienen permisos de ejecución
+- [ ] Instalación completada (automática o manual)
+- [ ] Los 3 contenedores están corriendo
+- [ ] Puedes acceder a http://localhost:8080
+- [ ] Iniciaste sesión como admin
+- [ ] Cambiaste la contraseña por defecto
+
+Si marcaste todos, ¡felicitaciones! OpenProject está instalado correctamente.
+
+---
+
+## 🎯 Próximos Pasos
+
+Una vez instalado:
+
+1. Cambia tu contraseña de admin
+2. Crea tu primer proyecto
+3. Invita a tu equipo
+4. Configura la integración con GitHub (Semana 3)
+5. Personaliza el flujo de trabajo (Semana 4)
+
+Consulta la **Guía de Usuario** para aprender a usar OpenProject.
